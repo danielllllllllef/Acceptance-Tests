@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<!--
+  Documento HTML principal de la landing FINDIMO.
+  - El DOCTYPE indica a los navegadores que esto es HTML5.
+  - `lang="es"` especifica el idioma principal (español) para accesibilidad y SEO.
+-->
+<html lang="es">
+<head>
+  <!-- Metadatos importantes -->
+  <meta charset="UTF-8" />
+  <!-- viewport para diseño responsivo en dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Título que aparece en pestañas y resultados de búsqueda -->
+  <title>FINDIMO – Alojamiento Estudiantil en Lima</title>
+  <!-- Descripción usada por motores de búsqueda y para compartir -->
+  <meta name="description" content="FINDIMO es la plataforma para que estudiantes universitarios en Lima encuentren alojamiento con datos claros de ubicación, precio y seguridad." />
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#18b5a4">
+</head>
+<body>
+  <!-- ======= NAVBAR ======= -->
+  <!-- ======= HEADER / NAV ======= -->
+  <!--
+    - <header> contiene la cabecera global (logo + navegación).
+    - `id="header"` se usa desde JS para aplicar sombra al hacer scroll.
+    - Dentro hay una <nav> con enlaces a secciones internas (anclas).
+    - El botón .hamburger es el toggle del menú móvil. Usa atributos ARIA
+      (aria-controls, aria-expanded) para accesibilidad.
+  -->
+  <header class="header" id="header">
+    <div class="container header__row">
+      <!-- Branding: enlaza al inicio. Mantén alt en la imagen para accesibilidad. -->
+      <a href="#" class="brand" aria-label="FINDIMO inicio">
+        <img src="logo.png" alt="FINDIMO" class="logo" />
+      </a>
+
+      <!-- Navegación principal: enlaces a secciones internas y CTA -->
+      <nav class="nav" id="nav">
+        <a href="#problema">Problema</a>
+        <a href="#solucion">Solución</a>
+        <a href="#caracteristicas-clave">Características</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#faq">Preguntas</a>
+        <!-- CTA en el nav — usar clase .btn para estilo y contraste -->
+        <a href="#contacto" class="btn btn--brand">Empezar</a>
+      </nav>
+
+      <!-- Botón hamburger para dispositivos móviles: controla la clase .open en la nav -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Floating CTA visible en desktop: llama la atención y enlaza a búsqueda -->
+    <a href="#caracteristicas-clave" class="floating-cta btn btn--brand" aria-label="Buscar ahora">🔎 Buscar ahora</a>
+  </header>
+
+  <!-- ======= HERO ======= -->
+  <!-- ======= HERO / HÉROE ======= -->
+  <!--
+    Sección principal que explica el valor de FINDIMO.
+    - Texto de impacto (eyebrow, h1, párrafo) para captar al usuario.
+    - Lista de pasos rápidos: cómo funciona la plataforma.
+    - CTA primario y secundario.
+    - Figura con imagen representativa y nota (puede ser un mockup o captura).
+  -->
+  <section class="hero">
+    <!-- Decorative gradient and wave under the hero to make it more llamativa -->
+    <div class="hero-accent" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="hero-wave" xmlns="http://www.w3.org/2000/svg"><path d="M0,32 C240,96 480,8 720,40 C960,72 1200,8 1440,56 L1440,120 L0,120 Z" fill="rgba(24,181,164,0.06)"></path></svg>
+    </div>
+    <div class="container hero__wrap">
+      <!-- Texto principal y CTAs -->
+      <div>
+        <span class="eyebrow reveal" data-delay="60">Alojamiento inteligente para estudiantes</span>
+        <h1 class="reveal" data-delay="120">Encuentra, compara y decide tu alojamiento en Lima con datos reales.</h1>
+        <p class="sub reveal" data-delay="180">
+          Qué hace: centraliza habitaciones y residencias con mapas, precios y filtros claros.
+          Para quién: estudiantes universitarios que llegan o viven en Lima.
+          Por qué importa: reduces tiempo y riesgo al decidir con información confiable y verificada.
+        </p>
+        <!-- Lista breve de beneficios/funcionalidades -->
+        <ul class="bullets reveal" id="como-funciona" data-delay="240">
+          <li><span class="dot"></span><span>Busca por distrito, universidad o tiempo de traslado.</span></li>
+          <li><span class="dot"></span><span>Compara precio total estimado, servicios incluidos y seguridad de la zona.</span></li>
+          <li><span class="dot"></span><span>Guarda favoritos y postula con un clic.</span></li>
+        </ul>
+        <div class="hero__cta reveal" data-delay="320">
+          <a href="#caracteristicas-clave" class="btn btn--brand">Explorar opciones</a>
+          <a href="#contacto" class="btn btn--ghost">Hablar con el equipo</a>
+        </div>
+      </div>
+
+      <!-- Media visual: imagen o captura de la plataforma -->
+      <figure class="hero__card reveal" aria-label="Estudiantes revisando opciones de alojamiento" data-delay="380">
+        <div class="hero__media float">
+          <img src="2.jpg" alt="Estudiantes colaborando frente a una computadora" />
+        </div>
+        <div class="hero__note">
+          <p>Resultados claros. Decisiones más seguras.</p>
+          <a href="#caracteristicas-clave" class="btn btn--brand" style="padding:8px 12px">Ver cómo</a>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ======= TESTIMONIOS (CARRUSEL CORREDIZO) ======= -->
+  <!-- ======= TESTIMONIOS / RESEÑAS (Carrusel) ======= -->
+  <!--
+    - Sección con pestañas (Estudiantes / Arrendadores).
+    - Cada pestaña muestra un carrusel horizontal de tarjetas (.carousel-track).
+    - Controles prev/next pausarán la animación al pasar el ratón para mejorar la usabilidad.
+    - Las tarjetas <article class="card"> contienen imagen, metadatos y cita.
+  -->
+  <section class="reviews" id="testimonios">
+    <div class="container">
+      <div class="reviews__head reveal" data-delay="60">
+        <h2>Historias reales de estudiantes y arrendadores</h2>
+        <p class="lead">Lo que dicen quienes ya usan FINDIMO.</p>
+
+        <!-- Pestañas para alternar entre tipos de testimonios -->
+        <div class="tabs" role="tablist" aria-label="Tipo de testimonios">
+          <button class="tab is-active" data-target="#carousel-estudiantes" role="tab" aria-selected="true">Estudiantes</button>
+          <button class="tab" data-target="#carousel-arrendadores" role="tab" aria-selected="false">Arrendadores</button>
+        </div>
+      </div>
+
+      <!-- Carrusel: Estudiantes (visibilidad controlada por JS) -->
+      <div class="carousel-container is-visible" id="carousel-estudiantes" role="tabpanel" aria-label="Testimonios de estudiantes">
+        <!-- Controles alrededor del track -->
+        <button class="ctrl prev" aria-label="Anterior">‹</button>
+        <div class="carousel-track" id="track-estudiantes">
+          <!-- Tarjetas de estudiantes: cada <article> representa una reseña individual -->
+          <article class="card">
+            <img src="6.jpg" class="photo" alt="Estudiante sonriendo">
+            <div class="body">
+              <div class="meta"><strong>Camila, 19</strong><small>UPC · De Cusco</small></div>
+              <p class="quote">"Encontré cuarto cerca del campus con tiempos reales. Ahorro 30 minutos diarios y pago lo justo."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="7.jpg" alt="Estudiante con mascarilla en pasillo de universidad" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Mario, 22</strong><small>PUCP · Villa El Salvador</small></div>
+              <p class="quote">"Los mapas de seguridad me dieron tranquilidad. Elegí una zona recomendada por otros alumnos."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="9.jpg" alt="Estudiante sonriendo en un campus" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Joh, 21</strong><small>UNI · De Piura</small></div>
+              <p class="quote">"Guardé favoritos y postulé en un clic. Me confirmaron visita el mismo día."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="4.jpg" alt="Estudiante sonriendo en un campus" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Mariela, 20</strong><small>USIL · De Loreto</small></div>
+              <p class="quote">"Comparé precio total con servicios incluidos. Evité gastos ocultos y cerré rápido."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="13.jpg" alt="Estudiante con mochila frente a edificio" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Sebastian, 22</strong><small>UPC · De Tumbes</small></div>
+              <p class="quote">"Con los filtros avanzados cree alertas por distrito y me avisó cuando salió algo en mi presupuesto. Visité 2 lugares."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+          
+          <!-- Duplicado para efecto infinito: repetir tarjetas para animación continua -->
+          <article class="card">
+            <img src="6.jpg" class="photo" alt="Estudiante sonriendo">
+            <div class="body">
+              <div class="meta"><strong>Camila, 19</strong><small>UPC · De Cusco</small></div>
+              <p class="quote">"Encontré cuarto cerca del campus con tiempos reales. Ahorro 30 minutos diarios y pago lo justo."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="7.jpg" alt="Estudiante con mascarilla en pasillo de universidad" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Mario, 22</strong><small>PUCP · Villa El Salvador</small></div>
+              <p class="quote">"Los mapas de seguridad me dieron tranquilidad. Elegí una zona recomendada por otros alumnos."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="9.jpg" alt="Estudiante sonriendo en un campus" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Joh, 21</strong><small>UNI · De Piura</small></div>
+              <p class="quote">"Guardé favoritos y postulé en un clic. Me confirmaron visita el mismo día."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="4.jpg" alt="Estudiante sonriendo en un campus" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Mariela, 20</strong><small>USIL · De Loreto</small></div>
+              <p class="quote">"Comparé precio total con servicios incluidos. Evité gastos ocultos y cerré rápido."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="13.jpg" alt="Estudiante con mochila frente a edificio" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Sebastian, 22</strong><small>UPC · De Tumbes</small></div>
+              <p class="quote">"Con los filtros avanzados cree alertas por distrito y me avisó cuando salió algo en mi presupuesto. Visité 2 lugares."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-dots" aria-hidden="true"></div>
+        <button class="ctrl next" aria-label="Siguiente">›</button>
+      </div>
+
+      <!-- Carrusel: Arrendadores -->
+      <div class="carousel-container" id="carousel-arrendadores" role="tabpanel" aria-label="Testimonios de arrendadores">
+        <button class="ctrl prev" aria-label="Anterior">‹</button>
+        <div class="carousel-track" id="track-arrendadores">
+          <!-- Tarjetas de arrendadores -->
+          <article class="card">
+            <img src="8.jpg" alt="Propietaria sonriendo en su inmueble" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Marcos, 48</strong><small>San Miguel</small></div>
+              <p class="quote">"Postulaciones de alumnos verificados y perfil claro. Publiqué y llené rápido."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="10.jpg" alt="Pareja de arrendadores felices en su patio" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Carlos y Ana, 60</strong><small>Pueblo Libre</small></div>
+              <p class="quote">"La plataforma evita estafas y preguntas repetidas. Todo claro desde el inicio."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="5.jpg" alt="Arrendador con camisa de jean posando" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Adriana, 54</strong><small>Los Olivos</small></div>
+              <p class="quote">"El filtro por universidad trajo interesados cercanos al campus. Llené dos habitaciones en una semana."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="12.jpg" alt="Arrendadora revisando mensajes de postulantes" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Patricia, 42</strong><small>Breña</small></div>
+              <p class="quote">"Los postulantes llegan con perfil completo y verificación. Menos coordinación por WhatsApp y cero no-shows."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="11.jpg" alt="Joven arrendador con mochila sonriendo" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Marcos, 34</strong><small>Miraflores</small></div>
+              <p class="quote">"Publicación simple, cobro claro y soporte por WhatsApp. Gestión 10/10."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+          
+          <!-- Duplicado para efecto infinito (misma lógica que el carrusel anterior) -->
+          <article class="card">
+            <img src="8.jpg" alt="Propietaria sonriendo en su inmueble" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Marcos, 48</strong><small>San Miguel</small></div>
+              <p class="quote">"Postulaciones de alumnos verificados y perfil claro. Publiqué y llené rápido."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="10.jpg" alt="Pareja de arrendadores felices en su patio" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Carlos y Ana, 60</strong><small>Pueblo Libre</small></div>
+              <p class="quote">"La plataforma evita estafas y preguntas repetidas. Todo claro desde el inicio."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="5.jpg" alt="Arrendador con camisa de jean posando" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Adriana, 54</strong><small>Los Olivos</small></div>
+              <p class="quote">"El filtro por universidad trajo interesados cercanos al campus. Llené dos habitaciones en una semana."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="12.jpg" alt="Arrendadora revisando mensajes de postulantes" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Patricia, 42</strong><small>Breña</small></div>
+              <p class="quote">"Los postulantes llegan con perfil completo y verificación. Menos coordinación por WhatsApp y cero no-shows."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="11.jpg" alt="Joven arrendador con mochila sonriendo" class="photo">
+            <div class="body">
+              <div class="meta"><strong>Marcos, 34</strong><small>Miraflores</small></div>
+              <p class="quote">"Publicación simple, cobro claro y soporte por WhatsApp. Gestión 10/10."</p>
+              <div class="rating" aria-label="5 de 5">★★★★★</div>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-dots" aria-hidden="true"></div>
+        <button class="ctrl next" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= EL PROBLEMA ======= -->
+  <!-- ======= EL PROBLEMA ======= -->
+  <!--
+    Sección que lista los principales pain points al buscar alojamiento.
+    - Usa una rejilla de tarjetas para cada problema.
+    - Cada <article> actúa como un bloque semántico con título y explicación.
+  -->
+  <section class="problem" id="problema">
+    <div class="container">
+      <h2>Los problemas de buscar alojamiento en Lima</h2>
+      <p class="lead">
+        Si eres estudiante que llega a Lima o un arrendador que busca inquilinos,
+        seguramente te identificas con estas dificultades:
+      </p>
+
+      <div class="grid-3">
+        <article class="problem-card reveal" data-delay="80">
+          <h3>Falta de información clara</h3>
+          <p>No sabes si el precio incluye servicios, internet o seguridad. Muchas veces descubres gastos ocultos después de mudarte.</p>
+        </article>
+
+        <article class="problem-card reveal" data-delay="120">
+          <h3>Pérdida de tiempo</h3>
+          <p>Buscar en grupos de Facebook o recorrer distritos sin referencias confiables consume horas y genera frustración.</p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Inseguridad y estafas</h3>
+          <p>Arrendadores informales, habitaciones sin condiciones mínimas o fotos que no corresponden al lugar real.</p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Dificultad para comparar</h3>
+          <p>Los anuncios están dispersos y no puedes calcular el costo total ni el tiempo de traslado a tu universidad.</p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Falta de confianza mutua</h3>
+          <p>Los arrendadores dudan de los estudiantes, y los estudiantes no saben si confiar en los dueños. No hay un filtro confiable.</p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Procesos complicados</h3>
+          <p>Agendar visitas y coordinar detalles por mensajes sueltos en WhatsApp genera confusión y retrasos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= LA SOLUCIÓN ======= -->
+  <!-- ======= LA SOLUCIÓN ======= -->
+  <!--
+    Explica brevemente cómo FINDIMO resuelve los problemas anteriores.
+    - Lista de beneficios con iconos.
+    - Una figura/imagen muestra la interfaz o mapa de la plataforma.
+  -->
+  <section class="solution" id="solucion">
+    <div class="container solution__wrap">
+      <div class="solution__text reveal" data-delay="80">
+        <h2>La solución: FINDIMO</h2>
+        <p class="lead">
+          Reunimos en un solo lugar habitaciones y residencias verificadas
+          cerca de tu universidad, con precios claros, tiempos de traslado
+          y herramientas que simplifican todo el proceso.
+        </p>
+
+        <ul class="benefits">
+          <li class="benefit">
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7L9 18l-5-5" stroke="#0b8f82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Mapas con <strong>tiempos reales</strong> hacia tu campus.
+          </li>
+          <li class="benefit">
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7L9 18l-5-5" stroke="#0b8f82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <strong>Precios transparentes</strong> (incluye servicios y condiciones).
+          </li>
+          <li class="benefit">
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7L9 18l-5-5" stroke="#0b8f82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Perfiles y <strong>reseñas verificadas</strong> para más seguridad.
+          </li>
+          <li class="benefit">
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7L9 18l-5-5" stroke="#0b8f82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <strong>Postula y agenda</strong> visitas en un clic.
+          </li>
+        </ul>
+      </div>
+
+      <figure class="solution__media reveal" data-delay="160">
+        <img src="20.jpg" alt="Vista de la plataforma FINDIMO mostrando mapa, precios y detalles del alojamiento">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ======= CARACTERÍSTICAS CLAVES ======= -->
+  <!-- ======= CARACTERÍSTICAS CLAVES ======= -->
+  <!--
+    Sección con tarjetas que resumen las funcionalidades principales.
+    - Cada tarjeta es un <article> que explica brevemente la característica.
+  -->
+  <section class="key" id="caracteristicas-clave">
+    <div class="container">
+      <h2>Características claves de FINDIMO</h2>
+      <p class="lead">Todo lo necesario para decidir con confianza y sin perder tiempo.</p>
+
+      <div class="grid-3">
+        <article class="key-card reveal" data-delay="60">
+          <h3>Busca por universidad y tiempos reales</h3>
+          <p>Filtra por campus y mira cuánto tardas en llegar caminando, en bus o taxi.</p>
+        </article>
+
+        <article class="key-card reveal" data-delay="120">
+          <h3>Precio total transparente</h3>
+          <p>Conoce si incluye luz, agua, internet y políticas antes de postular.</p>
+        </article>
+
+        <article class="key-card reveal" data-delay="180">
+          <h3>Verificación y reseñas</h3>
+          <p>Perfiles validados, comentarios de estudiantes y alerta de estafas.</p>
+        </article>
+
+        <article class="key-card">
+          <h3>Mapa de seguridad por zonas</h3>
+          <p>Indicadores por distrito para elegir con tranquilidad.</p>
+        </article>
+
+        <article class="key-card">
+          <h3>Mensajería y agenda</h3>
+          <p>Coordina visitas sin salir de la plataforma y evita no-shows.</p>
+        </article>
+
+        <article class="key-card">
+          <h3>Favoritos y alertas</h3>
+          <p>Guarda opciones y recibe avisos cuando aparece algo en tu presupuesto.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PREGUNTAS FRECUENTES ======= -->
+  <!-- ======= PREGUNTAS FRECUENTES ======= -->
+  <!--
+    Lista de preguntas frecuentes usando <details> para accesibilidad.
+    - Cada pregunta se implementa con <summary> y su respuesta dentro del <details>.
+  -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2>Preguntas frecuentes</h2>
+      <p class="lead">Respuestas rápidas a dudas comunes de estudiantes y arrendadores.</p>
+
+      <div class="faq-list">
+        <details class="faq-item reveal" data-delay="80">
+          <summary>¿FINDIMO cobra a los estudiantes?</summary>
+          <p>No. Explorar, comparar y postular es gratis para estudiantes.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo verifican a los arrendadores y publicaciones?</summary>
+          <p>Validamos identidad y propiedad con documentos y revisamos fotos y condiciones antes de publicar.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Puedo agendar visitas desde la plataforma?</summary>
+          <p>Sí. Elige horarios disponibles, recibe confirmación y recordatorios automáticos.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Qué universidades cubren los filtros por campus?</summary>
+          <p>Trabajamos con los principales campus de Lima (PUCP, UNI, UNMSM, UPC, USIL, UPN, entre otros) y seguimos agregando.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo publico si soy arrendador?</summary>
+          <p>Crea tu cuenta, sube fotos, detalla reglas y servicios. En minutos estarás recibiendo postulaciones de alumnos verificados.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CTA FINAL ======= -->
+  <!-- ======= CTA FINAL ======= -->
+  <!--
+    Llamado a la acción principal del final de la página.
+    - Dos botones: una acción principal (.btn--brand) y una secundaria (.btn--ghost).
+  -->
+  <section class="cta-final" id="cta-final">
+    <div class="container cta-final__wrap reveal" data-delay="80">
+      <div>
+        <h2>Empieza hoy con FINDIMO</h2>
+        <p class="lead">Encuentra tu habitación ideal o publica tu espacio y conecta con estudiantes verificados.</p>
+      </div>
+      <div class="actions">
+        <a href="#contacto" class="btn btn--brand">Crear cuenta gratis</a>
+        <a href="#contacto" class="btn btn--ghost">Hablar con el equipo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <!-- ======= FOOTER ======= -->
+  <!--
+    Pie de página con enlaces secundarios, contacto y copyright.
+    - `#year` se actualiza por JS con el año actual.
+  -->
+  <footer>
+    <div class="container footer">
+      <div class="fgrid">
+        <div>
+          <div class="brand" style="margin-bottom:8px">
+            <img src="logo.png" alt="FINDIMO" class="logo" style="height:48px">
+          </div>
+          <p style="color:#475569">Plataforma de alojamiento para estudiantes en Lima. Decisiones con datos claros.</p>
+          <small>© <span id="year"></span> FINDIMO. Todos los derechos reservados.</small>
+        </div>
+
+        <div class="fcol">
+          <h4>Producto</h4>
+          <a href="#problema">Problema</a>
+          <a href="#solucion">Solución</a>
+          <a href="#caracteristicas-clave">Características</a>
+        </div>
+
+        <div class="fcol">
+          <h4>Recursos</h4>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#faq">Preguntas</a>
+          <a href="#cta-final">Comenzar</a>
+        </div>
+
+        <div class="fcol" id="contacto">
+          <h4>Contacto</h4>
+          <a href="mailto:hola@findimo.pe">hola@findimo.pe</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
